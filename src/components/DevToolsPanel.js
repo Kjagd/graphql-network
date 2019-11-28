@@ -56,7 +56,7 @@ export default class DevToolsPanel extends React.Component {
     const flags = filter == filter.toLowerCase() ? 'i' : ''
     const reg = new RegExp(filter, flags)
     
-    const filtered = data.filter(entry => entry.data.find(request => reg.test(request.name)))
+    const filteredData = data.filter(entry => entry.data.find(request => reg.test(request.name)))
     return (
       <div className="devToolsWrapper">
         <div className={`entryWrapper ${entryOpen && 'shortEntryWrapper'}`}>
@@ -69,7 +69,7 @@ export default class DevToolsPanel extends React.Component {
           <input className="filterInput" placeholder='filter...' 
             onChange={e => this.setState({ filter: e.target.value })} />
         </div>
-        {filtered.map((entry, i) => {
+        {filteredData.map((entry, i) => {
           return (
             <Entry
               key={`entry-${i}`}
