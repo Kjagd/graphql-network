@@ -61,14 +61,19 @@ export default class DevToolsPanel extends React.Component {
       <div className="devToolsWrapper">
         <div className={`entryWrapper ${entryOpen && 'shortEntryWrapper'}`}>
         <div className="header">
-          <div className="operation">
-            <span className="name">Operation Name</span>
-            <span className="params">Params</span>
-            <span className="fields">Selection</span>
+            <div className="operation">
+              <span className="name">Operation Name</span>
+              <span className="params">Params</span>
+              <span className="fields">Selection</span>
+              <div>
+                <input className="filterInput" placeholder='filter...'
+                  onChange={e => this.setState({ filter: e.target.value })} />
+                <div className="clearContainer">
+                <button onClick={() => this.clearEntries()}>Clear</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <input className="filterInput" placeholder='filter...' 
-            onChange={e => this.setState({ filter: e.target.value })} />
-        </div>
         {filteredData.map((entry, i) => {
           return (
             <Entry
@@ -79,11 +84,6 @@ export default class DevToolsPanel extends React.Component {
             />
           );
         })}
-        {data.length > 0 &&
-          <div className="clearContainer">
-            <button onClick={() => this.clearEntries()}>Clear</button>
-          </div>
-        }
         </div>
         <div className={`displayAreaWrapper ${entryOpen && 'longDisplayAreaWrapper'}`}>
           {entryOpen && (
